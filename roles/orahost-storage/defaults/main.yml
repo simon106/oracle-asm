@@ -20,32 +20,33 @@
   dnfstaboptions: "{%- if item.1.fstaboptions is defined %}{{ item.1.fstaboptions }}
                    {%- else %}rw,bg,hard,nointr,tcp,vers=3,timeo=600,rsize=32768,wsize=32768{% endif %}"
 
- asm_diskgroups:
-   - diskgroup: crs
-     properties:
-       - {redundancy: normal, ausize: 1}
-     attributes:
-       - {name: 'compatible.rdbms', value: 11.2.0.4.0}
-       - {name: 'compatible.asm', value: 12.1.0.2.0}
-    disk:
-      - {device: /dev/sdc, asmlabel: crs01}
-      - {device: /dev/sdd, asmlabel: crs02}
-  - diskgroup: data
-     properties:
-       - {redundancy: external, ausize: 4}
-     attributes:
-       - {name: compatible.rdbms, value: 11.2.0.4.0}
-       - {name: compatible.asm, value: 12.1.0.2.0}
+  asm_diskgroups:
+    - diskgroup: crs
+      properties:
+        - {redundancy: normal, ausize: 1}
+      attributes:
+        - {name: 'compatible.rdbms', value: 11.2.0.4.0}
+        - {name: 'compatible.asm', value: 12.1.0.2.0}
      disk:
-       - {device: /dev/sde, asmlabel: data01}
-   - diskgroup: fra
-     properties:
-       - {redundancy: external, ausize: 4}
-     attributes:
-       - {name: compatible.rdbms, value: 11.2.0.4.0}
-       - {name: compatible.asm, value: 12.1.0.2.0}
-     disk:
-       - {device: /dev/sdf, asmlabel: fra01}
+       - {device: /dev/sdc, asmlabel: crs01}
+       - {device: /dev/sdd, asmlabel: crs02}
+       - {device: /dev/sde, asmlabel: crs03}
+   - diskgroup: data
+      properties:
+        - {redundancy: external, ausize: 4}
+      attributes:
+        - {name: compatible.rdbms, value: 11.2.0.4.0}
+        - {name: compatible.asm, value: 12.1.0.2.0}
+      disk:
+        - {device: /dev/sdf, asmlabel: data01}
+    - diskgroup: fra
+      properties:
+        - {redundancy: external, ausize: 4}
+      attributes:
+        - {name: compatible.rdbms, value: 11.2.0.4.0}
+        - {name: compatible.asm, value: 12.1.0.2.0}
+      disk:
+        - {device: /dev/sdg, asmlabel: fra01}
 
   #oradnfs:
   #  - server: nfsserver
